@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+</head>
+<script src="../lib/extjs-4.2.1/ext-all.js"></script>
+<link rel="stylesheet" type="text/css" href="../lib/extjs-4.2.1/resources/css/ext-all.css">
+
+<body>
+	<script>
+
+	Ext.create('Ext.data.Store', {
+	    storeId:'simpsonsStore',
+	    fields:['name', 'email', 'phone'],
+	    data:{'items':[
+	        { 'name': 'Lisa',  "email":"lisa@simpsons.com",  "phone":"555-111-1224"  },
+	        { 'name': 'Bart',  "email":"bart@simpsons.com",  "phone":"555-222-1234" },
+	        { 'name': 'Homer', "email":"home@simpsons.com",  "phone":"555-222-1244"  },
+	        { 'name': 'Marge', "email":"marge@simpsons.com", "phone":"555-222-1254"  }
+	    ]},
+	    proxy: {
+	        type: 'memory',
+	        reader: {
+	            type: 'json',
+	            root: 'items'
+	        }
+	    }
+	});
+
+	Ext.create('Ext.grid.Panel', {
+	    title: 'Simpsons',
+	    store: Ext.data.StoreManager.lookup('simpsonsStore'),
+	    columns: [
+	        { text: 'Name',  dataIndex: 'name' },
+	        { text: 'Email', dataIndex: 'email', flex: 1 },
+	        { text: 'Phone', dataIndex: 'phone' }
+	    ],
+	    height: 200,
+	    width: 400,
+	    renderTo: Ext.getBody()
+	});
+
+	</script>
+</body>
+</html>
